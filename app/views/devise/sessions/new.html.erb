@@ -3,16 +3,7 @@
     <div class="col-md-offset-4 col-md-4">
       <h2>Log in</h2>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <% if f.errors.any? %>
-          <div id="error_explanapostion">
-            <h2><%= pluralize(f.errors.count, "error") %> prohibited this post from being saved:</h2>
-            <ul>
-              <% f.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
+      <%= devise_error_messages! %>
         <div class="form-group">
           <%= f.label :email %><br />
           <%= f.email_field :email, autofocus: true, class:"form-control" %>
