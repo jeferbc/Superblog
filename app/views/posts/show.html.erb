@@ -4,7 +4,7 @@
       <p id="notice"><%= notice %></p>
       <h1 class="text-center"><%= @post.title %></h1>
         <h4 class="text-center"><%= "Publicado por #{User.find(@post.user_id).email.split('@')[0]} hace aproximadamente #{time_ago_in_words(@post.created_at)}" %></h4>
-      <p><%= @post.content_post %></p>
+      <p><%= markdown(@post.content_post) %></p>
     </div>
   </div>
   <% if user_signed_in? %>
@@ -26,7 +26,7 @@
         <% @post.comments.each do |comment| %>
           <div class="row">
             <h4><%= "#{User.find(comment.user_id).email.split('@')[0]} Comentó hace aproximadamente #{time_ago_in_words(comment.created_at)}" %></h4>
-            <p><%= comment.comment_content %></p>
+            <p><%= markdown(comment.comment_content) %></p>
           </div>
         <% end %>
       </div>

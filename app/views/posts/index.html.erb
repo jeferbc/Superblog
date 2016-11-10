@@ -5,7 +5,7 @@
         <div class="jumbotron">
           <h2><%= post.title %></h2>
           <h4><%= "Publicado por #{User.find(post.user_id).email.split('@')[0]} hace aproximadamente #{time_ago_in_words(post.created_at)}" %></h4>
-          <p><%= post.content_post.first(250) %> ...</p>
+          <p><%= markdown(post.content_post.first(250)) %> ...</p>
           <p><%= link_to 'Show', post, class:"btn btn-success" %>
             <% if user_signed_in? && current_user.id == User.find(post.user_id).id  %>
              <%= link_to 'Edit', edit_post_path(post), class:"btn btn-warning" %>
