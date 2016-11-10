@@ -1,30 +1,35 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-8 col-md-offset-2">
       <p id="notice"><%= notice %></p>
       <h1 class="text-center"><%= @post.title %></h1>
+        <h4 class="text-center"><%= "Publicado por #{User.find(@post.user_id).email.split('@')[0]} hace aproximadamente #{time_ago_in_words(@post.created_at)}" %></h4>
       <p><%= @post.content_post %></p>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-10 col-md-offset-1">
-      <%= form_for(@comment) do |f| %>
-        <%= hidden_field_tag "comment[post_id]", @post.id %>
-        <div class="form-group">
-          <%= f.label :comment_content %>
-          <%= f.text_area :comment_content, class:"form-control" %>
-        </div>
-        <div class="actions">
-          <%= f.submit 'Comentar', class: 'btn btn-success' %>
-        </div>
-      <% end %>
+  <% if user_signed_in? %>
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <%= form_for(@comment) do |f| %>
+          <%= hidden_field_tag "comment[post_id]", @post.id %>
+          <%= hidden_field_tag "comment[user_id]", current_user.id %>
+          <div class="form-group">
+            <%= f.label :comment_content %>
+            <%= f.text_area :comment_content, class:"form-control" %>
+          </div>
+          <div class="actions">
+            <%= f.submit 'Comentar', class: 'btn btn-success' %>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-md-8 col-md-offset-2">
+        <% @post.comments.each do |comment| %>
+          <div class="row">
+            <h4><%= "#{User.find(comment.user_id).email.split('@')[0]} Comentó hace aproximadamente #{time_ago_in_words(comment.created_at)}" %></h4>
+            <p><%= comment.comment_content %></p>
+          </div>
+        <% end %>
+      </div>
     </div>
-    <div class="col-md-10 col-md-offset-1">
-      <% @post.comments.each do |comment| %>
-        <div class="row">
-          <p><%= comment.comment_content %></p>
-        </div>
-      <% end %>
-    </div>
-  </div>
+  <% end %>
 </div>

@@ -41,7 +41,6 @@ class CommentsController < ApplicationController
     redirect_to comments_path
 
   end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_comment
@@ -50,6 +49,6 @@ class CommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params.require(:comment).permit(:comment_content, :post_id)
+      params.require(:comment).permit(:comment_content, :post_id, :user_id)
     end
 end

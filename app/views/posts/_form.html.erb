@@ -1,39 +1,27 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <%= form_for(post) do |f| %>
-      <% if post.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
-          <ul>
-            <% post.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
+<%= form_for(@post) do |post| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanapostion">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+      <ul>
+        <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
         <% end %>
-
-        <div class="form-group">
-          <%= f.label :title %>
-          <%= f.text_field :title, class:"form-control" %>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :subtitle %>
-          <%= f.text_field :subtitle, class:"form-control" %>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :content_post %>
-          <%= f.text_area :content_post, class:"form-control" %>
-        </div>
-
-        <div class="actions">
-          <%= f.submit 'Guardar Post', class: 'btn btn-success' %>
-          <%= link_to 'Back', posts_path, class:"btn btn-danger" %>
-        </div>
-      <% end %>
-
+      </ul>
     </div>
+  <% end %>
+  <div class="form-group">
+    <%= post.label :title %>
+    <%= post.text_field :title, class:"form-control" %>
   </div>
-</div>
+
+  <div class="form-group">
+    <%= post.label :content_post %>
+    <%= post.text_area :content_post, class:"form-control" %>
+  </div>
+  <%= hidden_field_tag "post[user_id]", current_user.id %>
+
+  <div class="actions">
+    <%= post.submit 'Guardar Post', class: 'btn btn-success' %>
+    <%= link_to 'Back', posts_path, class:"btn btn-danger" %>
+  </div>
+<% end %>
