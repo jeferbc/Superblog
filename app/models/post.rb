@@ -12,6 +12,7 @@
 
 class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
+  belongs_to :user
 
   validates :title, :content_post, presence: true
   validates :content_post, length: { minimum: 250 }
