@@ -17,13 +17,13 @@ module ApplicationHelper
          end
 
         when 2..44           then "#{distance_in_minutes} minutos"
-        when 45..89          then 'aproximadamente 1 hora'
-        when 90..1439        then "aproximadamente #{(distance_in_minutes.to_f / 60.0).round} horas"
+        when 45..89          then '1 hora'
+        when 90..1439        then "#{(distance_in_minutes.to_f / 60.0).round} horas"
         when 1440..2879      then '1 dia'
         when 2880..43199     then "#{(distance_in_minutes / 1440).round} dias"
-        when 43200..86399    then 'aproximadamente 1 mes'
+        when 43200..86399    then '1 mes'
         when 86400..525959   then "#{(distance_in_minutes / 43200).round} meses"
-        when 525960..1051919 then 'aproximadamente 1 año'
+        when 525960..1051919 then '1 año'
      else                      "mas de #{(distance_in_minutes / 525960).round} años"
 
    end

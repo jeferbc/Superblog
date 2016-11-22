@@ -6,6 +6,10 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.all
+    if params[:concept].present?
+      @posts = @posts.where("concept LIKE ?", "%#{params[:concept]}%")
+      byebug
+    end
   end
 
   # GET /posts/1
@@ -23,7 +27,6 @@ class PostsController < ApplicationController
   def edit
 
   end
-
   # POST /posts
   # POST /posts.json
   def create

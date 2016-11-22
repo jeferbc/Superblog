@@ -2,14 +2,14 @@
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <p id="notice"><%= notice %></p>
-      <h1 class="text-center"><%= @post.title %></h1>
-        <h4 class="text-center"><%= "Publicado por #{User.find(@post.user_id).email.split('@')[0]} hace aproximadamente #{time_ago_in_words(@post.created_at)}" %></h4>
-      <p><%= markdown(@post.content_post) %></p>
-    </div>
-  </div>
-  <% if user_signed_in? %>
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2">
+      <div class="thumbnail">
+        <div class="caption">
+          <h1 class="text-center text-color tittle"><%= @post.title %></h1>
+          <h4 class="text-center text-color"><%= "Publicado por #{User.find(@post.user_id).email.split('@')[0]} hace aproximadamente #{time_ago_in_words(@post.created_at)}" %></h4>
+          <p class="text-color content"><%= markdown("#{@post.content_post}") %></p>
+        </div>
+      </div>
+      <% if user_signed_in? %>
         <%= form_for(@comment) do |f| %>
           <%= hidden_field_tag "comment[post_id]", @post.id %>
           <%= hidden_field_tag "comment[user_id]", current_user.id %>
@@ -21,15 +21,17 @@
             <%= f.submit 'Comentar', class: 'btn btn-success' %>
           </div>
         <% end %>
-      </div>
-      <div class="col-md-8 col-md-offset-2">
-        <% @post.comments.each do |comment| %>
-          <div class="row">
-            <h4><%= "#{User.find(comment.user_id).email.split('@')[0]} Comentó hace aproximadamente #{time_ago_in_words(comment.created_at)}" %></h4>
+      <% end %>
+      <% @post.comments.each do |comment| %>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><%= "#{User.find(comment.user_id).email.split('@')[0]} Comentó hace aproximadamente #{time_ago_in_words(comment.created_at)}" %></h3>
+          </div>
+          <div class="panel-body">
             <p><%= markdown(comment.comment_content) %></p>
           </div>
-        <% end %>
+        </div>
+      <% end %>
       </div>
     </div>
-  <% end %>
-</div>
+  </div>
