@@ -8,7 +8,6 @@ class PostsController < ApplicationController
     @posts = Post.all
     if params[:concept].present?
       @posts = @posts.where("concept LIKE ?", "%#{params[:concept]}%")
-      byebug
     end
   end
 
