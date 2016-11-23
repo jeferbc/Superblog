@@ -13,11 +13,12 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
+    byebug
     @comment = Comment.new(comment_params)
     if @comment.save
       flash[:notice] = 'El comentario fue guardado exitosamente'
     else
-      flash[:notice] = 'El comentario fue guardado exitosamente'
+      flash[:alert] = 'El comentario fue guardado erroneamente'
     end
     redirect_to post_path(id: params[:comment][:post_id])
   end

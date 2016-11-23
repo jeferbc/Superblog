@@ -14,7 +14,6 @@
           <%= hidden_field_tag "comment[post_id]", @post.id %>
           <%= hidden_field_tag "comment[user_id]", current_user.id %>
           <div class="form-group">
-            <%= f.label :comment_content %>
             <%= f.text_area :comment_content, class:"form-control" %>
           </div>
           <div class="actions">

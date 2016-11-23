@@ -15,5 +15,4 @@ class Comment < ApplicationRecord
   belongs_to :user
 
   validates :comment_content, presence: true
-  validates :comment_content, length: { maximum: 250 }
 end

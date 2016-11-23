@@ -122,6 +122,7 @@
       margin: 0px;
       padding: 0px;
       color: #d3dae1;
+      margin-left: -160px;
 
     }
 
@@ -140,7 +141,10 @@
   footer{
     background-color: #585760;
     height: 100px;
-
+    width: 100%;
+    position: relative;
+    bottom: 0px;
+    display: block;
   }
   footer p{
     font-size: 20px;
